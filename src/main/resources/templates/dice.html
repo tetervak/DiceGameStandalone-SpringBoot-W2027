@@ -14,15 +14,15 @@
 </header>
 <main class="container">
     <h2 class="mt-4 mb-3">Roll the Dice</h2>
-    <p>
+    <div class="d-flex flex-wrap gap-2">
         <img th:each="value: ${rollData.values}"
              th:src="@{|images/dice/side_${value}.png|}"
              th:alt="'side ' + ${value}">
-    </p>
-    <p>
+    </div>
+    <div class="mt-4">
         <span class="total_label">Total:</span>
         <span th:text="${rollData.total}" class="total_number">6</span>
-    </p>
+    </div>
     <form action="dice.html" th:action="@{roll-dice}">
         <div class="row align-items-baseline mb-3 mt-4">
             <div class="col-auto">
