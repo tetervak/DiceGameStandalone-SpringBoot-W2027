@@ -24,21 +24,23 @@
         <span th:text="${rollData.total}" class="total_number">6</span>
     </p>
     <form action="dice.html" th:action="@{roll-dice}">
-        <p>
-            <label for="c">Number of Dice:</label>
-            <select id="c" th:name="numberOfDice">
-                <option th:each="i : ${#numbers.sequence(1, 5)}"
-                        th:selected="${i == rollData.numberOfDice}"
-                        th:value="${i}" th:text="${i}">1</option>
-            </select>
-        </p>
-
-        <input type="submit" value="Roll Dice" class="btn btn-primary my-3">
-
+        <div class="row align-items-baseline mb-3 mt-4">
+            <div class="col-auto">
+                <label for="c" class="form-label">Number of Dice:</label>
+            </div>
+            <div class="col-auto">
+                <select id="c" th:name="numberOfDice" class="form-select">
+                    <option th:each="i : ${#numbers.sequence(1, 5)}"
+                            th:selected="${i == rollData.numberOfDice}"
+                            th:value="${i}" th:text="${i}">1</option>
+                </select>
+            </div>
+        </div>
+        <div class="row align-items-baseline mb-3 gap-2 ms-4">
+            <button type="submit" class="btn btn-primary my-3 w-auto">Roll Dice</button>
+            <a th:href="@{reset}" class="btn btn-outline-danger w-auto">Reset</a>
+        </div>
     </form>
-    <p>
-        <a href="start.html" th:href="@{reset}">Reset</a>
-    </p>
 </main>
 <footer th:replace="~{start::footer}">
     Some footer text

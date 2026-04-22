@@ -13,21 +13,23 @@
     <h1>Dice Game</h1>
 </header>
 <main class="container">
-    <h2>Roll the Dice</h2>
+    <h2 class="mt-4 mb-3">Roll the Dice</h2>
     <form th:action="@{/roll-dice}">
-        <p>
-            <label for="c">Number of Dice:</label>
-            <select id="c" th:name="numberOfDice">
-                <option th:value="1">1</option>
-                <option th:value="2">2</option>
-                <option th:value="3" selected>3</option>
-                <option th:value="4">4</option>
-                <option th:value="5">5</option>
-            </select>
-        </p>
-        <p>
-            <input type="submit" value="Roll Dice">
-        </p>
+        <div class="row align-items-baseline">
+            <div class="col-auto">
+                <label for="c" class="form-label">Number of Dice:</label>
+            </div>
+            <div class="col-auto">
+                <select id="c" th:name="numberOfDice" class="form-select">
+                    <option th:value="1">1</option>
+                    <option th:value="2">2</option>
+                    <option th:value="3" selected>3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary my-3 ms-4">Roll Dice</button>
     </form>
 </main>
 <footer th:fragment="Footer" class="container d-flex flex-column flex-wrap align-items-center py-3 mt-4 border-top">
