@@ -14,6 +14,7 @@ The program code demonstrates the following concepts:
 - Dependency injection 
 - Request parameters, simple form without validation
 - Using Cookies (add, read, delete)
+- Redirection to different addresses
 - JUnit 4 testing
 - Various features of Thymeleaf templates
 
