@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Dice Game</title>
+</head>
+<body>
+<header th:replace="~{start::Header}">
+    <h1>Some header text</h1>
+</header>
+<main class="container">
+    <h2 class="mt-4 mb-3">Roll the Dice</h2>
+    <p>
+        <img th:each="value: ${rollData.values}"
+             th:src="@{|images/dice/side_${value}.png|}"
+             th:alt="'side ' + ${value}">
+    </p>
+    <p>
+        <span class="total_label">Total:</span>
+        <span th:text="${rollData.total}" class="total_number">6</span>
+    </p>
+    <form action="dice.html" th:action="@{roll-dice}">
+        <p>
+            <label for="c">Number of Dice:</label>
+            <select id="c" th:name="numberOfDice">
+                <option th:each="i : ${#numbers.sequence(1, 5)}"
+                        th:selected="${i == rollData.numberOfDice}"
+                        th:value="${i}" th:text="${i}">1</option>
+            </select>
+        </p>
+
+        <input type="submit" value="Roll Dice" class="btn btn-primary my-3">
+
+    </form>
+    <p>
+        <a href="start.html" th:href="@{reset}">Reset</a>
+    </p>
+</main>
+<footer th:replace="~{start::footer}">
+    Some footer text
+</footer>
+</body>
+</html>

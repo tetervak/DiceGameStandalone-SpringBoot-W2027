@@ -6,8 +6,6 @@ import ca.tetervak.dicegame.service.DiceRollerService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,21 +62,19 @@ public class DiceGameController {
             @CookieValue(value="rollData", defaultValue = "") String cookieValue
     ){
         log.trace("dice() is called");
-
         if(cookieValue.isEmpty()){
             log.debug("no previously saved state in the cookie");
-            return new ModelAndView("game-start");
+            return new ModelAndView("start");
         }else{
             log.debug("restoring previous state from the cookie");
             try{
                 DiceRollData rollData = cookieDataService.decodeRollData(cookieValue);
-                return new ModelAndView("game-result", "rollData", rollData);
+                return new ModelAndView("dice", "rollData", rollData);
             }catch(Exception e){
                 log.error("could not recover the data from the cookie");
-                return new ModelAndView("game-start");
+                return new ModelAndView("start");
             }
         }
-
     }
 
     @GetMapping("/reset")

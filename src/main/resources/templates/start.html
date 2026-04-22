@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Dice Game</title>
+</head>
+<body>
+<header th:fragment="Header" class="container d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <h1>Dice Game</h1>
+</header>
+<main class="container">
+    <h2>Roll the Dice</h2>
+    <form th:action="@{/roll-dice}">
+        <p>
+            <label for="c">Number of Dice:</label>
+            <select id="c" th:name="numberOfDice">
+                <option th:value="1">1</option>
+                <option th:value="2">2</option>
+                <option th:value="3" selected>3</option>
+                <option th:value="4">4</option>
+                <option th:value="5">5</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Roll Dice">
+        </p>
+    </form>
+</main>
+<footer th:fragment="Footer" class="container d-flex flex-column flex-wrap align-items-center py-3 mt-4 border-top">
+    <div>PROG27545 / Web Application Design and Implementation</div>
+    <div>Sheridan College, Alexander Tetervak</div>
+    <div th:text="${#temporals.format(localDate, 'MMMM dd, yyyy')}">March 15, 2023</div>
+</footer>
+</body>
+</html>

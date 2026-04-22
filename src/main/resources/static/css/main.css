@@ -9,6 +9,15 @@ main{
     padding-left: 1em;
 }
 
+h1 {
+    color: #4caf50;
+    text-shadow: 2px 2px 5px #81c784;
+}
+
+footer{
+    font-style: italic;
+}
+
 h2 {
     color: #00bcd4;
 }
