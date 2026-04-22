@@ -31,49 +31,54 @@ public class DiceGameController {
         this.cookieDataService = cookieDataService;
     }
 
-    @GetMapping(value = {"/", "/dice-game"})
-    public ModelAndView diceGame(
+    @GetMapping("/")
+    public String redirectToDice(){
+        return "redirect:/dice";
+    }
+
+    @GetMapping("/roll-dice")
+    public String rollDice(
             @RequestParam(defaultValue = "3") int numberOfDice,
-            @RequestParam(defaultValue = "false") boolean isRolled,
-            HttpServletResponse response,
+            HttpServletResponse response
+    ){
+        log.trace("rollDice() is called");
+        DiceRollData rollData;
+        if(numberOfDice > 0 && numberOfDice <= 5){
+            rollData = rollerService.getRollData(numberOfDice);
+        }else{
+            log.warn("the numberOfDice is out of the range {}", numberOfDice);
+            rollData = rollerService.getRollData(3);
+        }
+        log.debug("rollData = {}", rollData);
+        Cookie cookie = new Cookie(
+                "rollData",
+                cookieDataService.encodeRollData(rollData)
+        );
+        cookie.setMaxAge(24*60*60);
+        response.addCookie(cookie);
+        return "redirect:/dice";
+    }
+
+    @GetMapping( "/dice")
+    public ModelAndView dice(
             @CookieValue(value="rollData", defaultValue = "") String cookieValue
     ){
-        log.trace("diceGame() is called");
-        log.debug("numberOfDice = {}", numberOfDice);
-        log.debug("isRolled = {}", isRolled);
+        log.trace("dice() is called");
 
-        if(isRolled){
-            log.debug("dice is rolled");
-            DiceRollData rollData;
-            if(numberOfDice > 0 && numberOfDice <= 5){
-                rollData = rollerService.getRollData(numberOfDice);
-            }else{
-                log.warn("the numberOfDice is out of the range {}", numberOfDice);
-                rollData = rollerService.getRollData(3);
-            }
-            log.debug("rollData = {}", rollData);
-            Cookie cookie = new Cookie(
-                    "rollData",
-                    cookieDataService.encodeRollData(rollData));
-            cookie.setMaxAge(24*60*60);
-            response.addCookie(cookie);
-            return  new ModelAndView("game-result", "rollData", rollData);
+        if(cookieValue.isEmpty()){
+            log.debug("no previously saved state in the cookie");
+            return new ModelAndView("game-start");
         }else{
-            log.debug("dice is not rolled");
-            if(cookieValue.isEmpty()){
-                log.debug("no previously saved state in the cookie");
+            log.debug("restoring previous state from the cookie");
+            try{
+                DiceRollData rollData = cookieDataService.decodeRollData(cookieValue);
+                return new ModelAndView("game-result", "rollData", rollData);
+            }catch(Exception e){
+                log.error("could not recover the data from the cookie");
                 return new ModelAndView("game-start");
-            }else{
-                log.debug("restoring previous state from the cookie");
-                try{
-                    DiceRollData rollData = cookieDataService.decodeRollData(cookieValue);
-                    return new ModelAndView("game-result", "rollData", rollData);
-                }catch(Exception e){
-                    log.error("could not recover the data from the cookie");
-                    return new ModelAndView("game-start");
-                }
             }
         }
+
     }
 
     @GetMapping("/reset")

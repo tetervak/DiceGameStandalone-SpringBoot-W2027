@@ -8,12 +8,12 @@
     <title>Dice Game</title>
 </head>
 <body>
-<header th:replace="~{header-and-footer::Header}">
-    <h1>Some header text</h1>
+<header th:fragment="Header">
+    <h1>Dice Game</h1>
 </header>
 <main>
     <h2>Roll the Dice</h2>
-    <form action="game-result.html" th:action="@{dice-game}">
+    <form action="game-result.html" th:action="@{/roll-dice}">
         <p>
             <label for="c">Number of Dice:</label>
             <select id="c" th:name="numberOfDice">
@@ -25,13 +25,13 @@
             </select>
         </p>
         <p>
-            <input type="hidden" th:name="isRolled" value="true">
             <input type="submit" value="Roll Dice">
         </p>
     </form>
 </main>
-<footer th:replace="~{header-and-footer::footer}">
-    Some footer text
+<footer th:fragment="Footer">
+    Sheridan College&nbsp;&nbsp;<span class='hart'>&#9825;</span>&nbsp;&nbsp;
+    <span th:text="${#temporals.format(localDate, 'MMMM dd, yyyy')}">March 15, 2023</span>
 </footer>
 </body>
 </html>
