@@ -1,14 +1,5 @@
 /* Alex Tetervak, Sheridan College, Ontario */
 
-body{
-    padding-left: 1em;
-    font-family: sans-serif;
-}
-
-main{
-    padding-left: 1em;
-}
-
 h1 {
     color: #4caf50;
     text-shadow: 2px 2px 5px #81c784;
@@ -22,19 +13,14 @@ h2 {
     color: #00bcd4;
 }
 
-.total_label{
+.total-label{
     color: #673ab7;
     font-size: larger;
     font-weight: bolder;
 }
 
-.total_number{
+.total-number{
     font-size: larger;
     font-weight: bolder;
     color: #ff9800;
-}
-
-input[type="submit"] {
-    width: 100px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
