@@ -10,7 +10,7 @@
     <title>Dice Game</title>
 </head>
 <body>
-<header th:fragment="Header" class="container d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+<header th:fragment="header" class="container d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     <h1>Dice Game</h1>
 </header>
 <main class="container">
@@ -33,7 +33,7 @@
         <button type="submit" class="btn btn-primary my-3 ms-4">Roll Dice<i class="bi bi-check-lg ms-1"></i></button>
     </form>
 </main>
-<footer th:fragment="Footer" class="container d-flex flex-column flex-wrap align-items-center py-3 mt-4 border-top">
+<footer th:fragment="footer" class="container d-flex flex-column flex-wrap align-items-center py-3 mt-4 border-top">
     <div>PROG27545 / Web Application Design and Implementation</div>
     <div>Sheridan College, Alexander Tetervak</div>
     <div th:text="${#temporals.format(localDate, 'MMMM dd, yyyy')}">March 15, 2023</div>
