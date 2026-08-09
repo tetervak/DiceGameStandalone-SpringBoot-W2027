@@ -24,7 +24,7 @@
         <span class="total-label">Total:</span>
         <span th:text="${rollData.total}" class="total-number">6</span>
     </div>
-    <form action="dice.html" th:action="@{roll-dice}">
+    <form action="dice.html" th:action="@{/roll-dice}">
         <div class="row align-items-baseline mb-3 mt-4">
             <div class="col-auto">
                 <label for="c" class="form-label">Number of Dice:</label>
@@ -39,7 +39,7 @@
         </div>
         <div class="row align-items-baseline mb-3 gap-2 ms-4">
             <button type="submit" class="btn btn-primary my-3 w-auto">Roll Dice<i class="bi bi-check-lg ms-1"></i></button>
-            <a th:href="@{reset}" class="btn btn-outline-warning ms-2 w-auto">Reset<i class="bi bi-x-lg ms-1"></i></a>
+            <a th:href="@{/reset}" class="btn btn-outline-warning ms-2 w-auto">Reset<i class="bi bi-x-lg ms-1"></i></a>
         </div>
     </form>
 </main>
